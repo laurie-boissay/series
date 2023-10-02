@@ -10,45 +10,57 @@
 
 </head>
 <body>
-    <h1>Test !</h1>
-    <div>
+    <h1>Tests et manipulations du langage Twig</h1>
+
         {#
         Commentaire sur plusieurs ligne ou pas
         et qui en + est invisible  si on fait
         "Afficher code source" !!!
         #}
+    <div>
+        <h2>Créer et afficher une variable :</h2>
+        <p>{{ "Les moustaches pour afficher du contenu, généralement une variable : " }}</p>
+        {% set ma_variable = "Ceci est ma variable Twig" %}
 
-        <p>
-            {# Créer et afficher une variable : #}
+        <p>{{ ma_variable }}.</p>
+        <p>{{ ma_variable|upper }} avec le filtre "upper".</p>
+        <p>{{ ma_variable|lower }} avec le filtre "lower".</p>
+        <p>{{ ma_variable|length }} avec le filtre "length".</p>
+    </div>
 
-            {{ "Les moustaches pour afficher du contenu, généralement une variable : " }}
-
-            {% set ma_variable = "Ceci est ma variable Twig !" %}
-
-            {{ ma_variable }}
-        </p>
-
-
-        {# Créer et afficher un tableau : #}
+    <div>
+        <h2>Créer et afficher un tableau :</h2>
         {% set colors = ["purple", "blue", "cyan", "green", "yellow", "orange", "red"] %}
+
+        <p>Le tableau "colors" contient {{ colors|length }} couleurs : </p>
+        <p>{{ colors|join(', ')}}.</p>
+
         {% for color in colors %} {# On écrit la boucle dans le bon sens !!! C'est beauuuuuuuuu ! <3 #}
             <div style="background-color: {{ color }}">
-                {{ color }}
+                {{ loop.index }} {{ color }}
+                {% if loop.last %}
+                    <p>Au pied d'un arc-en-ciel est caché un chaudron d'or.</p>
+                {% endif%}
             </div>
         {% endfor %}
+    </div>
 
-        {# Créer et afficher un objet : #}
+    <div>
+        <h2>Créer et afficher un objet :</h2>
         {% set book = {
             title: "La représentation des arc-en-ciels dans l'histoire",
             year: "2050",
             author: "Jaenne Doe"
         } %}
         <h3>{{ book.title }}</h3>
-        <div>
             {% for key, val in book %}
                 <p>{{ key }} : {{ val }}</p>
             {% endfor %}
-        </div>
+    </div>
+
+    <div>
+        <h2>Formater une date :</h2>
+        {{ "now"|date('d/m/y H:i') }}
     </div>
 
 </body>
