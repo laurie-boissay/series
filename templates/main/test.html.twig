@@ -6,8 +6,50 @@
           content="width=device-width, user-scalable=yes, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Test</title>
+
+
 </head>
 <body>
     <h1>Test !</h1>
+    <div>
+        {#
+        Commentaire sur plusieurs ligne ou pas
+        et qui en + est invisible  si on fait
+        "Afficher code source" !!!
+        #}
+
+        <p>
+            {# Créer et afficher une variable : #}
+
+            {{ "Les moustaches pour afficher du contenu, généralement une variable : " }}
+
+            {% set ma_variable = "Ceci est ma variable Twig !" %}
+
+            {{ ma_variable }}
+        </p>
+
+
+        {# Créer et afficher un tableau : #}
+        {% set colors = ["purple", "blue", "cyan", "green", "yellow", "orange", "red"] %}
+        {% for color in colors %} {# On écrit la boucle dans le bon sens !!! C'est beauuuuuuuuu ! <3 #}
+            <div style="background-color: {{ color }}">
+                {{ color }}
+            </div>
+        {% endfor %}
+
+        {# Créer et afficher un objet : #}
+        {% set book = {
+            title: "La représentation des arc-en-ciels dans l'histoire",
+            year: "2050",
+            author: "Jaenne Doe"
+        } %}
+        <h3>{{ book.title }}</h3>
+        <div>
+            {% for key, val in book %}
+                <p>{{ key }} : {{ val }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
 </body>
 </html>
