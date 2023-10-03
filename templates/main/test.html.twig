@@ -1,16 +1,9 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=yes, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test</title>
+{% extends 'base.html.twig' %}
 
+{% block title %}{{ parent() }} | Tests{% endblock %}
 
-</head>
-<body>
-    <h1>Tests et manipulations du langage Twig</h1>
+{% block body %}
+     <h1>Tests et manipulations du langage Twig</h1>
 
         {#
         Commentaire sur plusieurs ligne ou pas
@@ -38,10 +31,10 @@
         {% for color in colors %} {# On écrit la boucle dans le bon sens !!! C'est beauuuuuuuuu ! <3 #}
             <div style="background-color: {{ color }}">
                 {{ loop.index }} {{ color }}
+            </div>
                 {% if loop.last %}
                     <p>Au pied d'un arc-en-ciel est caché un chaudron d'or.</p>
                 {% endif%}
-            </div>
         {% endfor %}
     </div>
 
@@ -62,6 +55,4 @@
         <h2>Formater une date :</h2>
         {{ "now"|date('d/m/y H:i') }}
     </div>
-
-</body>
-</html>
+{% endblock %}
