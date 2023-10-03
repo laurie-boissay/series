@@ -11,6 +11,16 @@
         "Afficher code source" !!!
         #}
     <div>
+        <h2>Passer des variables aux fonctions :</h2>
+        <p>
+            La variable "maSerie" est déclarée dans "MainControler" et s'affiche ici : {{ mySerie.title }}.
+        </p>
+        <p>
+            Je lui donne {{ autreVariable }} étoiles sauf pour la dernière saison.
+        </p>
+    </div>
+
+    <div>
         <h2>Créer et afficher une variable :</h2>
         <p>{{ "Les moustaches pour afficher du contenu, généralement une variable : " }}</p>
         {% set ma_variable = "Ceci est ma variable Twig" %}

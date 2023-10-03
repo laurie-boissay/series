@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-
 
 class MainController extends AbstractController
 {
@@ -21,6 +19,13 @@ class MainController extends AbstractController
      */
     public function test()
     {
-        return $this->render('main/test.html.twig');
+        $serie = [
+            "title" => "Game of Thrones",
+            "year" => 2000,
+        ];
+        return $this->render('main/test.html.twig', [
+            "mySerie" => $serie,
+            "autreVariable" => 5,
+        ]);
     }
 }
