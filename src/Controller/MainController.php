@@ -26,6 +26,7 @@ class MainController extends AbstractController
         return $this->render('main/test.html.twig', [
             "mySerie" => $serie,
             "autreVariable" => 5,
+            "variableHTML" => '<strong>variableHTML</strong>'
         ]);
     }
 }

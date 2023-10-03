@@ -18,6 +18,15 @@
         <p>
             Je lui donne {{ autreVariable }} étoiles sauf pour la dernière saison.
         </p>
+        <p>
+            la variable "variableHTML" ne sera pas exécutée : {{ variableHTML }}.
+        </p>
+        <p>
+            A moins que je ne le veuille. Dans ce cas j'utilise le filtre "raw" : {{ variableHTML | raw}}
+        </p>
+        <p>
+            Filtre "striptags" : {{ variableHTML | striptags}}.
+        </p>
     </div>
 
     <div>
