@@ -33,7 +33,11 @@
                 {{ loop.index }} {{ color }}
             </div>
                 {% if loop.last %}
-                    <p>Au pied d'un arc-en-ciel est caché un chaudron d'or.</p>
+                    <p>
+                        D’après le folklore irlandais, le Leprechaun possèderait un chaudron plein
+                        à ras-bord de pièces d’or. Ce dernier serait bien sûr soigneusement caché dans un lieu
+                        merveilleux : le pied d’un arc-en-ciel !
+                    </p>
                 {% endif%}
         {% endfor %}
     </div>
@@ -49,6 +53,7 @@
             {% for key, val in book %}
                 <p>{{ key }} : {{ val }}</p>
             {% endfor %}
+        https://www.astrolabium.be/IMG/pdf/arc-en-ciel_antiquite_final.pdf
     </div>
 
     <div>
