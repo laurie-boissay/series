@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}todo afficher le titre de la série{% endblock %}
+{% block title %} {{ parent() }} | {{ serie.name }}{% endblock %}
 
 {% block body %}
-    <h2>todo afficher le titre de la série</h2>
-    {# afficher toutes les info de la série. #}
+    <h2>{{ serie.name }}</h2>
+
+    <div><img src="{{ asset('img/backdrops/' ~ serie.backdrop) }}" alt="{{ serie.name }}"></div>
+
+    <div>Genre : {{ serie.genres }}</div>
+    <div>Status : {{ serie.status }}</div>
+    <div>Vote : {{ serie.vote }}</div>
+
+    <h3>Overview :</h3>
+    <div>{{ serie.overview }}</div>
+
 {% endblock %}
 
