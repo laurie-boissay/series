@@ -21,13 +21,7 @@ class SerieController extends AbstractController
     public function list(SerieRepository $serieRepository): Response
     {
         // Récupère un tableau de séries à partir du repository de séries.
-        $series = $serieRepository->findBy(
-            [], // Tableau de critères de recherche, vide ici pour obtenir toutes les séries.
-            ['popularity' => 'DESC', 'vote' => 'DESC'], // Spécifie les critères de tri.
-            30 // Limite le nombre de résultats à 30 séries.
-        // Offset 10 // Affiche les séries de 10 à 40.
-        );
-
+        $series = $serieRepository->findBestSeries();
         // dd($series); // DEBUG
 
         return $this->render('serie/list.html.twig', [
