@@ -8,8 +8,8 @@ use App\Repository\SerieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/series", name="serie_")
@@ -23,7 +23,6 @@ class SerieController extends AbstractController
     {
         // Récupère un tableau de séries à partir du repository de séries.
         $series = $serieRepository->findBestSeries();
-        // dd($series); // DEBUG
 
         return $this->render('serie/list.html.twig', [
             "series" => $series
@@ -45,18 +44,31 @@ class SerieController extends AbstractController
     /**
      * @Route("/create", name="create")
      */
-    public function create(Request $request): Response
+    public function create(
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response
     {
         // Crée une nouvelle instance de l'entité "Serie".
         $serie = new Serie();
+        $serie->setDateCreated(new \DateTime()); // Ce champ n'est pas dans le formulaire.
 
         // Crée un formulaire basé sur le type "SerieType" et associe l'instance de la série.
         $serieForm = $this->createForm(SerieType::class, $serie);
-
         // À ce stade, le formulaire a été créé, mais il reste à le traiter.
 
-        // TODO : Traiter le formulaire.
-        // Cette ligne est un rappel pour indiquer qu'il faut ajouter la logique de traitement du formulaire ici.
+        //logique de traitement du formulaire :
+        $serieForm->handleRequest($request); // $serie contient les données du formulaire.
+
+        if ($serieForm->isSubmitted()){
+            $entityManager->persist($serie);
+            $entityManager->flush();
+
+            $this->addFlash('succes', 'Serie added. Good job !');
+
+            // Redirection vers la page détails de la nouvelle entrée.
+            return $this->redirectToRoute('serie_details', ['id' => $serie->getId()]);
+        }
 
         // Une fois le formulaire traité, généralement, on enregistre les données en base de données.
         // Cependant, dans le code actuel, cela n'est pas encore implémenté.
@@ -93,17 +105,11 @@ class SerieController extends AbstractController
         $entityManager->flush(); // Confirme + envoie la requête INSERT.
         // Les requêtes doctrine empêchent les injections SQL en BdD.
 
-        //dump($serie); // DEBUG
-
         $serie->setGenres('anotherExemple'); // Update
         $entityManager->flush(); // Confirme + envoie de la requête UPDATE.
 
-        //dump($serie); // DEBUG
-
         $entityManager->remove($serie); // Delete
         $entityManager->flush(); // Confirme + envoie de la requête DELETE.
-
-        //dump($serie); // DEBUG
 
         return $this->render('serie/create.html.twig');
     }
