@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Serie;
+use App\Form\SerieType;
 use App\Repository\SerieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,11 +47,24 @@ class SerieController extends AbstractController
      */
     public function create(Request $request): Response
     {
-        // dd($request); // DEBUG
-        // dump($request);  // DEBUG
+        // Crée une nouvelle instance de l'entité "Serie".
+        $serie = new Serie();
 
-        // Aller chercher la série en BdD.
-        return $this->render('serie/create.html.twig');
+        // Crée un formulaire basé sur le type "SerieType" et associe l'instance de la série.
+        $serieForm = $this->createForm(SerieType::class, $serie);
+
+        // À ce stade, le formulaire a été créé, mais il reste à le traiter.
+
+        // TODO : Traiter le formulaire.
+        // Cette ligne est un rappel pour indiquer qu'il faut ajouter la logique de traitement du formulaire ici.
+
+        // Une fois le formulaire traité, généralement, on enregistre les données en base de données.
+        // Cependant, dans le code actuel, cela n'est pas encore implémenté.
+
+        // Enfin, on rend une vue Twig pour afficher le formulaire.
+        return $this->render('serie/create.html.twig', [
+            'serieForm' => $serieForm->createView()
+        ]);
     }
 
     /**
