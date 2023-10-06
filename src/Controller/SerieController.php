@@ -47,7 +47,7 @@ class SerieController extends AbstractController
     public function create(Request $request): Response
     {
         // dd($request); // DEBUG
-        dump($request);  // DEBUG
+        // dump($request);  // DEBUG
 
         // Aller chercher la série en BdD.
         return $this->render('serie/create.html.twig');
@@ -79,17 +79,17 @@ class SerieController extends AbstractController
         $entityManager->flush(); // Confirme + envoie la requête INSERT.
         // Les requêtes doctrine empêchent les injections SQL en BdD.
 
-        dump($serie); // DEBUG
+        //dump($serie); // DEBUG
 
         $serie->setGenres('anotherExemple'); // Update
         $entityManager->flush(); // Confirme + envoie de la requête UPDATE.
 
-        dump($serie); // DEBUG
+        //dump($serie); // DEBUG
 
         $entityManager->remove($serie); // Delete
         $entityManager->flush(); // Confirme + envoie de la requête DELETE.
 
-        dump($serie); // DEBUG
+        //dump($serie); // DEBUG
 
         return $this->render('serie/create.html.twig');
     }
