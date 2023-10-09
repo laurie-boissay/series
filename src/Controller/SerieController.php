@@ -60,7 +60,7 @@ class SerieController extends AbstractController
         //logique de traitement du formulaire :
         $serieForm->handleRequest($request); // $serie contient les données du formulaire.
 
-        if ($serieForm->isSubmitted()){
+        if ($serieForm->isSubmitted() && $serieForm->isValid()){ //isValid est important pour la sécurité.
             $entityManager->persist($serie);
             $entityManager->flush();
 

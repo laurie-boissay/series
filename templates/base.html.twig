@@ -29,6 +29,7 @@
             </header>
 
             {# Read and display all flash messages #}
+            {# pour passer les messages prédéfinits en fr : config->package->translation.yaml #}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="flash flash-{{ label }}">
