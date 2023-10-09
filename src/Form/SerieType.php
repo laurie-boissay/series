@@ -16,40 +16,43 @@ class SerieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            // Champ "name" avec un label "Title" (TextType pour du texte)
             ->add('name', TextType::class, [
                 'label' => 'Title'
             ])
+            // Champ "overview" (champ de texte) avec l'option "required" désactivée
             ->add('overview', null, [
                 'required' => false
             ])
+            // Champ "status" (choix multiple) avec des options de choix prédéfinies
             ->add('status', ChoiceType::class, [
                 'choices' => [
                     'Cancelled' => 'cancelled',
                     'Ended' => 'ended',
                     'Returning' => 'returning'
                 ],
-                'multiple' => false
+                'multiple' => false // Permet de ne choisir qu'un seul élément
             ])
-            ->add('vote')
-            ->add('popularity')
-            ->add('genres')
+            // Les champs suivants n'ont pas de type spécifié, donc ils sont de type par défaut (probablement TextType)
+            ->add('vote') // Champ "vote"
+            ->add('popularity') // Champ "popularity"
+            ->add('genres') // Champ "genres"
             ->add('firstAirDate', DateType::class, [
-                'html5' => true,
-                'widget' => 'single_text'
+                'html5' => true, // Utilise l'élément HTML5 pour le champ de date
+                'widget' => 'single_text' // Affiche un seul champ de texte pour la date
             ])
-            ->add('lastAirDate', DateType::class)
-            ->add('backdrop')
-            ->add('poster')
-            ->add('tmdbID')
-            //->add('submit', SubmitType::class) // mauvaise pratique
-
+            ->add('lastAirDate', DateType::class) // Champ "lastAirDate" de type DateType
+            ->add('backdrop') // Champ "backdrop"
+            ->add('poster') // Champ "poster"
+            ->add('tmdbID') // Champ "tmdbID"
+            // Le champ 'submit' est commenté car il n'est pas nécessaire dans le formulaire (mauvaise pratique)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Serie::class,
+            'data_class' => Serie::class, // L'entité associée au formulaire
         ]);
     }
 }
