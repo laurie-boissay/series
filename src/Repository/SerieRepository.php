@@ -64,7 +64,6 @@ class SerieRepository extends ServiceEntityRepository
 
         // Exécute la requête et retourne les résultats.
         $results = $query->getResult();
-        dump($results); // DEBUG
 
         return $results;
     }
