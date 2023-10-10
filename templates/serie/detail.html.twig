@@ -3,16 +3,30 @@
 {% block title %} {{ parent() }} | {{ serie.name }}{% endblock %}
 
 {% block body %}
-    <h2>{{ serie.name }}</h2>
-
-    <div><img src="{{ asset('img/backdrops/' ~ serie.backdrop) }}" alt="{{ serie.name }}"></div>
-
-    <div>Genre : {{ serie.genres }}</div>
-    <div>Status : {{ serie.status }}</div>
-    <div>Vote : {{ serie.vote }}</div>
-
-    <h3>Overview :</h3>
-    <div>{{ serie.overview }}</div>
-
+    <div class="serie-details">
+        <div>
+            <img src="{{ asset('img/posters/series/' ~ serie.poster) }}" alt="{{ serie.name }}">
+        </div>
+        <div class="serie-details-info">
+            <h2>{{ serie.name }}</h2>
+            <div>User ratings : {{ serie.vote }}</div>
+            <div>Categorized in : {{ serie.genres }}</div>
+            <div>Serie status : {{ serie.status }}</div>
+            <div>Aired from : {{ serie.firstAirDate | date("Y-m-d") }} to {{ serie.lastAirDate | date("Y-m-d") }} </div>
+            <div>{{ serie.overview | nl2br }}</div>
+        </div>
+    </div>
 {% endblock %}
 
+{# image de fond pour la page détails de chaque série. #}
+{% block extrastyles %}
+    <style>
+        body {
+            background-image: linear-gradient(
+                    rgba(0, 0, 0, 0.9),
+                    rgba(0, 0, 0, 0.7)),
+                url("{{ asset('img/backdrops/') ~ serie.backdrop }}"
+            );
+        }
+    </style>
+{% endblock %}
