@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Serie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -30,26 +31,19 @@ class SerieRepository extends ServiceEntityRepository
      *
      * Elle utilise QueryBuilder pour construire la requête.
      *
-     * @return Serie[] Un tableau d'objets Serie représentant les meilleures séries.
+     * @return Paginator Un tableau d'objets Serie représentant les meilleures séries.
      */
     public function findBestSeries()
     {
-        /*
-        // DQL (Doctrine Query Language) : Utilisation d'une requête DQL
-        $entityManager = $this->getEntityManager(); // Récupération de l'EntityManager
-        $dql = "
-            SELECT s
-            FROM App\Entity\Serie as s
-            WHERE s.popularity > 100
-            AND s.vote > 8
-            ORDER BY s.popularity DESC
-        ";
-
-        $query = $entityManager->createQuery($dql); // Création de la requête à partir de la DQL
-        */
-
         // Création d'un QueryBuilder pour construire la requête.
         $queryBuilder = $this->createQueryBuilder('s');
+
+        // Effectue une jointure gauche entre l'entité principale "s" et l'entité "seasons"
+        // et utilise l'alias "seas" pour référencer la table "seasons" dans la suite de la requête.
+        $queryBuilder   ->leftJoin('s.seasons', 'seas')
+                        // Ajoute également "seas" aux sélections de la requête,
+                        // ce qui signifie que les colonnes de l'entité "seasons" seront incluses dans les résultats.
+                        ->addSelect('seas');
 
         // Ajout des conditions pour sélectionner les meilleures séries.
         $queryBuilder->andWhere('s.popularity > 100');
@@ -62,9 +56,10 @@ class SerieRepository extends ServiceEntityRepository
         // Limite le nombre de résultats à 50.
         $query->setMaxResults(50);
 
-        // Exécute la requête et retourne les résultats.
-        $results = $query->getResult();
+        // Création d'un objet Paginator pour paginer les résultats de la requête.
+        $result = new Paginator($query);
 
-        return $results;
+        // Retourne le tableau paginé d'objets Serie représentant les meilleures séries.
+        return $result;
     }
 }

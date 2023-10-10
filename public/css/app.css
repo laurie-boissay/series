@@ -10,11 +10,6 @@ a {
     text-decoration: none;
 }
 
-
-main {
-    flex: 1;
-}
-
 img {
     max-width: 100%;
 }
@@ -60,19 +55,22 @@ nav li {
 }
 
 .serie-details {
-    display: flex; /* Utilisation de flex pour organiser les éléments enfants */
-    align-items: center; /* Centrer verticalement les éléments enfants */
+    display: flex;
+    align-items: flex-start; /* Aligne les éléments en haut du conteneur */
 }
 
-.serie-details-info {
-    flex-grow: 1; /* Permet au div des détails de la série de prendre autant d'espace que possible */
-    padding: 20px; /* Espacement pour les détails de la série */
-    color: white; /* Couleur du texte */
+.two-columns {
+    display: flex;
+    flex-direction: row; /* Les éléments sont alignés côte à côte */
 }
 
-.serie-details img {
-    width: 100%; /* Ajuste la largeur de l'image du poster pour qu'elle remplisse le conteneur parent */
-    height: auto; /* Réinitialise la hauteur pour conserver le rapport hauteur-largeur d'origine */
+.second-column {
+    width: 50%;
+}
+
+.poster-serie {
+    width: 100%; /* Pour que l'image occupe toute la largeur de sa div parent */
+    padding: 10px;
 }
 
 .container {
@@ -101,4 +99,10 @@ body > .container {
 
 a:hover {
     color: #BC956B;
+}
+
+@media screen and (min-width: 700px) {
+    .serie-details {
+        grid-template-columns: 300px 1fr;
+    }
 }

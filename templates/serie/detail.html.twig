@@ -4,18 +4,39 @@
 
 {% block body %}
     <div class="serie-details">
-        <div>
-            <img src="{{ asset('img/posters/series/' ~ serie.poster) }}" alt="{{ serie.name }}">
-        </div>
-        <div class="serie-details-info">
-            <h2>{{ serie.name }}</h2>
-            <div>User ratings : {{ serie.vote }}</div>
-            <div>Categorized in : {{ serie.genres }}</div>
-            <div>Serie status : {{ serie.status }}</div>
-            <div>Aired from : {{ serie.firstAirDate | date("Y-m-d") }} to {{ serie.lastAirDate | date("Y-m-d") }} </div>
-            <div>{{ serie.overview | nl2br }}</div>
-        </div>
-    </div>
+        <div class="two-columns">
+            <div class="first-column">
+                <img class="poster-serie" src="{{ asset('img/posters/series/' ~ serie.poster) }}" alt="{{ serie.name }}">
+            </div>
+
+            <div class="second-column">
+                <h2>{{ serie.name }}</h2>
+                <div>User ratings : {{ serie.vote }}</div>
+                <div>Categorized in : {{ serie.genres }}</div>
+                <div>Serie status : {{ serie.status }}</div>
+                <div>Aired from : {{ serie.firstAirDate | date("Y-m-d") }} to {{ serie.lastAirDate | date("Y-m-d") }} </div>
+                <div>{{ serie.overview | nl2br }}</div>
+                <section class="seasons">
+                    <h3>Seasons list :</h3>
+                    {% for season in serie.seasons %}
+                        <article>
+                            <img
+                                src="{{ asset('img/posters/seasons/'~season.poster) }}"
+                                alt="{{ serie.name }} season #{{ season.number }}"
+                            >
+                            <div>
+                                <h4>Season {{ season.number }}</h4>
+                                {% if season.overview %}
+                                    <div>{{ season.overview }}</div>
+                                {% endif %}
+                            </div>
+                        </article>
+                    {% endfor %}
+                </section> <!-- end class="seasons" -->
+            </div> <!-- end class="serie-details-info" -->
+        </div> <!-- end class="two-columns" -->
+    </div> <!-- end class="serie-details" -->
+
 {% endblock %}
 
 {# image de fond pour la page détails de chaque série. #}
