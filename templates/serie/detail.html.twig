@@ -27,6 +27,9 @@
                     rgba(0, 0, 0, 0.7)),
                 url("{{ asset('img/backdrops/') ~ serie.backdrop }}"
             );
+            background-repeat: no-repeat; /* Cette ligne évite la répétition */
+            background-position: center; /* Centre l'image de fond */
+            background-size: cover; /* Agrandit l'image pour couvrir la totalité du conteneur */
         }
     </style>
 {% endblock %}

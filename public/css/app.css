@@ -59,6 +59,22 @@ nav li {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 }
 
+.serie-details {
+    display: flex; /* Utilisation de flex pour organiser les éléments enfants */
+    align-items: center; /* Centrer verticalement les éléments enfants */
+}
+
+.serie-details-info {
+    flex-grow: 1; /* Permet au div des détails de la série de prendre autant d'espace que possible */
+    padding: 20px; /* Espacement pour les détails de la série */
+    color: white; /* Couleur du texte */
+}
+
+.serie-details img {
+    width: 100%; /* Ajuste la largeur de l'image du poster pour qu'elle remplisse le conteneur parent */
+    height: auto; /* Réinitialise la hauteur pour conserver le rapport hauteur-largeur d'origine */
+}
+
 .container {
     max-width: 1000px;
     margin: auto;
