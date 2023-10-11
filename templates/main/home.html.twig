@@ -3,6 +3,6 @@
 {% block title %}{{ parent() }} | Home{% endblock %}
 
 {% block body %}
-    <h1>Coucou !</h1>
+    <h1>Coucou {% if app.user %}{{ app.user.firstname }}{% endif %} !</h1>
 {% endblock %}
 
