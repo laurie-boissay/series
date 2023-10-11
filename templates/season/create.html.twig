@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme seasonForm "bootstrap_3_horizontal_layout.html.twig" %}
+
+{% block title %}Create a season{% endblock %}
+
+{% block body %}
+    {{ form_start(seasonForm) }}
+    {{ form_widget(seasonForm) }}
+    <button type="submit" class="btn btn-outline-info">Create</button>
+    {{ form_end(seasonForm) }}
+{% endblock %}
+
+
+
